@@ -1,0 +1,62 @@
+# .github/workflows/deploy.yml
+name: Deploy 3D Hub to GitHub Pages
+
+# 1. This tells GitHub to run this script whenever you push to the 'main' branch
+on:
+  push:
+    branches: ["main"]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# 2. Grant permissions so the script can upload the website files to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 3. Prevent multiple deployments from running at exactly the same time
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step A: Get the code from your repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step B: Install Node.js (the environment needed to build React)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # Step C: Install your project dependencies (Three.js, Tailwind, etc.)
+      - name: Install Dependencies
+        run: npm install
+
+      # Step D: Build the final optimized website (creates the 'dist' folder)
+      - name: Build Project
+        run: npm run build
+
+      # Step E: Prepare GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      # Step F: Upload the 'dist' folder to the GitHub server
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      # Step G: Deploy it live to the internet!
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
