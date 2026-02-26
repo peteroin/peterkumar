@@ -1,14 +1,17 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import ModelViewer from './components/ModelViewer';
 
-// 1. Initial Local Data
+// Vite's base URL (will be '/peterkumar/' on GitHub Pages if configured in vite.config.js)
+const baseUrl = import.meta.env.BASE_URL;
+
+// 1. Initial Local Data - updated with baseUrl!
 const INITIAL_DATA = [
-  { id: '1', title: 'Arduino', author: 'Peter Kumar', likes: 120, url: '/arduino.glb', sizeMB: 4.2, vertices: 15400, category: 'Electronics' },
-  { id: '2', title: 'Desktop', author: 'Peter Kumar', likes: 85, url: '/desk.glb', sizeMB: 12.8, vertices: 42000, category: 'Furniture' },
-  { id: '3', title: 'Div Container', author: 'Peter Kumar', likes: 340, url: '/div.glb', sizeMB: 1.5, vertices: 850, category: 'Abstract' },
-  { id: '4', title: 'Logo', author: 'Peter Kumar', likes: 210, url: '/inner_logo.glb', sizeMB: 0.8, vertices: 320, category: 'Branding' },
-  { id: '5', title: 'Raspberry Pi', author: 'Peter Kumar', likes: 55, url: '/raspi.glb', sizeMB: 6.4, vertices: 28900, category: 'Electronics' },
-  { id: '6', title: 'Circuit Board', author: 'Peter Kumar', likes: 890, url: '/trans.glb', sizeMB: 3.1, vertices: 12050, category: 'Electronics' },
+  { id: '1', title: 'Arduino', author: 'Peter Kumar', likes: 120, url: `${baseUrl}arduino.glb`, sizeMB: 4.2, vertices: 15400, category: 'Electronics' },
+  { id: '2', title: 'Desktop', author: 'Peter Kumar', likes: 85, url: `${baseUrl}desk.glb`, sizeMB: 12.8, vertices: 42000, category: 'Furniture' },
+  { id: '3', title: 'Div Container', author: 'Peter Kumar', likes: 340, url: `${baseUrl}div.glb`, sizeMB: 1.5, vertices: 850, category: 'Abstract' },
+  { id: '4', title: 'Logo', author: 'Peter Kumar', likes: 210, url: `${baseUrl}inner_logo.glb`, sizeMB: 0.8, vertices: 320, category: 'Branding' },
+  { id: '5', title: 'Raspberry Pi', author: 'Peter Kumar', likes: 55, url: `${baseUrl}raspi.glb`, sizeMB: 6.4, vertices: 28900, category: 'Electronics' },
+  { id: '6', title: 'Circuit Board', author: 'Peter Kumar', likes: 890, url: `${baseUrl}trans.glb`, sizeMB: 3.1, vertices: 12050, category: 'Electronics' },
 ];
 
 const CATEGORIES = ['All', 'Electronics', 'Furniture', 'Abstract', 'Branding', 'Props', 'Toys', 'Food'];
@@ -39,7 +42,6 @@ function App() {
   const loaderRef = useRef(null);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [previewFileUrl, setPreviewFileUrl] = useState(null);
-  const [previewFileName, setPreviewFileName] = useState('');
 
   // Show Toast Helper
   const showToast = (message) => {
@@ -288,7 +290,7 @@ function App() {
         )}
       </main>
 
-      {/* Upload Modal (Kept clean and exactly the same) */}
+      {/* Upload Modal */}
       {isUploadOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl flex flex-col h-[80vh]">
