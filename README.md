@@ -1,16 +1,24 @@
-# React + Vite
+# 🪐 Peter 3D Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Peter 3D Hub is a modern, high-performance web application designed to host, view, and interact with 3D models. Built entirely on the frontend with React Three Fiber, it features smooth infinite scrolling, real-time 3D rendering, and a beautifully crafted dark-mode UI.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **Real-Time 3D Rendering:** View `.glb` and `.gltf` files directly in the browser using Three.js and React Three Fiber.
+* **Dynamic Lighting Controls:** Instantly switch between lighting environments (City, Studio, Sunset, Forest) to see how materials react in real-time.
+* **Local Upload & Preview:** Drag and drop local 3D files to preview them in an interactive 3D modal without needing to upload them to a server first.
+* **Infinite Scrolling:** Automatically fetches and renders new models as the user scrolls down the page, utilizing an Intersection Observer.
+* **Smart Downloading:** Bypasses standard CORS restrictions by fetching files as blobs, allowing users to safely download models.
+* **Interactive UI:** Features category filtering, live searching, toast notifications, and interactive "Like" and "Share" buttons.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+* **Framework:** React 18 (via Vite)
+* **Styling:** Tailwind CSS
+* **3D Engine:** Three.js & @react-three/fiber
+* **3D Helpers:** @react-three/drei (for OrbitControls, Stage environments, and GLTF loading)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
